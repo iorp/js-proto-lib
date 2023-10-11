@@ -2,6 +2,39 @@
   
 
 //#region Prototypes 
+// todo bringg to js proto 
+Object.prototype.deepMerge = function (obj) {
+    
+  return Object.keys(obj).reduce((merged, key) =>
+    ({
+      ...merged,
+      [key]:
+        typeof obj[key] === 'object' && !Array.isArray(obj[key]) && this[key]
+          ? this[key].deepMerge(obj[key])
+          : obj[key],
+    }),
+    { ...this }
+  );
+};
+/* 
+ Example usage:
+var obj1 = {
+  a: 1,
+  b: {
+    c: 2,
+  },
+};
+
+var obj2 = {
+  b: {
+    d: 3,
+  },
+  e: 4,
+};
+
+var mergedObject = obj1.deepMerge(obj2);
+console.log(mergedObject);
+*/
 
 
 Array.prototype.insertAt =  function insertAt(ele,index){
